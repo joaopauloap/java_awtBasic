@@ -1,53 +1,43 @@
-// importing Java AWT class  
-import java.awt.*;    
-  
-// class AWTExample2 directly creates instance of Frame class  
-class AWTExample1 {    
-  
-   // initializing using constructor  
-   AWTExample1() {  
-  
-      // creating a Frame  
-      Frame f = new Frame();  
-  
-      // creating a Label  
-      Label l = new Label("Employee id:");   
-  
-      // creating a Button  
-      Button b = new Button("Submit");  
-  
-      // creating a TextField  
-      TextField t = new TextField();  
-  
-      // setting position of above components in the frame  
-      l.setBounds(20, 80, 80, 30);  
-      t.setBounds(20, 100, 80, 30);  
-      b.setBounds(100, 100, 80, 30);  
-  
-      // adding components into frame    
-      f.add(b);  
-      f.add(l);  
-      f.add(t);  
-  
-      // frame size 300 width and 300 height    
-      f.setSize(400,300);  
-  
-      // setting the title of frame  
-      f.setTitle("Employee info");   
-          
-      // no layout  
-      f.setLayout(null);   
-  
-      // setting visibility of frame  
-      f.setVisible(true);  
-}    
-  
-// main method  
-public static void main(String args[]) {   
-  
-// creating instance of Frame class   
-AWTExample1 awt_obj = new AWTExample1();    
-  
-}  
-  
+import java.awt.*;  
+import java.awt.event.*;  
+
+class AWTExample1 extends Frame implements ActionListener{ 
+	
+	TextField tf;  
+	
+	AWTExample1(){  	  
+		
+		// and using the windowClosing() method of WindowAdapter class  
+        addWindowListener (new WindowAdapter() {    
+            public void windowClosing (WindowEvent e) {    
+                dispose();    
+            }    
+        });   
+        
+        
+		//create components
+		Label l = new Label("This is a label:");   
+	    l.setBounds(60,30,170,20);    
+		tf=new TextField();  
+		tf.setBounds(60,50,170,20);  
+		Button b=new Button("click me");  
+		b.setBounds(100,120,80,30);  
+		  
+		//register listener  
+		b.addActionListener(this);//passing current instance  
+		  
+		//add components and set size, layout and visibility  
+		add(l);add(b);add(tf);  
+		setSize(300,300);  
+		setLayout(null);  
+		setVisible(true);  
+	}  
+	
+	public void actionPerformed(ActionEvent e){  
+		tf.setText("You clicked the button");  
+	}  
+	
+	public static void main(String args[]){  
+		new AWTExample1();  
+	}  
 }  
